@@ -16,8 +16,6 @@ public class IllnessRecordRepository: BaseRepository<IllnessRecordViem>, IDispos
     {
         var result = new List<IllnessRecordViem>();
         
-            connection.Open();
-        
             var cmd = new MySqlCommand(@"
             SELECT 
                 ir.Id,

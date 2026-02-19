@@ -18,7 +18,7 @@ public partial class MainWindowViewModel : ViewModelBase
     [ObservableProperty] private List<int> pageSizes;
     [ObservableProperty] private string pageInfo;
     
-    private int currentPage = 0;
+    private int currentPage = 1;
     private int totalPages;
 
     public MainWindowViewModel()
@@ -47,19 +47,19 @@ public partial class MainWindowViewModel : ViewModelBase
         IllnessRecords.Clear();
         var rows = db.GetPage(pageIndex, CurrentPageSize);
         rows.ForEach(i => IllnessRecords.Add(i));
-        pageInfo = $"Страница {currentPage + 1} из {totalPages}";
+        pageInfo = $"Страница {currentPage} из {totalPages}";
     }
 
     [RelayCommand]
     private void ShowFirstPage()
     {
-        ShowPage(0);
+        ShowPage(1);
     }
 
     [RelayCommand]
     private void ShowLastPage()
     {
-        ShowPage(totalPages - 1);
+        ShowPage(totalPages);
     }
 
     [RelayCommand]
@@ -72,7 +72,7 @@ public partial class MainWindowViewModel : ViewModelBase
     [RelayCommand]
     private void ShowPreviousPage()
     {
-        if (currentPage > 0)
+        if (currentPage > 1)
         {
             ShowPage(currentPage - 1);
         }

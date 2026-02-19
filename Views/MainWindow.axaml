@@ -13,4 +13,35 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
+    <Grid RowDefinitions="* Auto">
+        <DataGrid 
+            ItemsSource="{Binding IllnessRecords}"
+            GridLinesVisibility="All"
+            BorderThickness="1"
+            BorderBrush="Gray">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}"/>
+                <DataGridTextColumn Header="Имя" Binding="{Binding EmployeeName}"/>
+                <DataGridTextColumn Header="Отдел" Binding="{Binding DepartmentName}"/>
+                <DataGridTextColumn Header="Тип заболевания" Binding="{Binding IllnessType}"/>
+                <DataGridTextColumn Header="Начало болезни" Binding="{Binding StartDate}"/>
+                <DataGridTextColumn Header="Окончание болезни" Binding="{Binding EndDate}"/>
+                <DataGridTextColumn Header="Продолжительность болезни" Binding="{Binding DurationDays}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel 
+            Grid.Row="1"
+            Orientation="Horizontal"
+            HorizontalAlignment="Center">
+                <Button Content="&lt;&lt;" Command="{Binding ShowFirstPageCommand}"/>
+                <Button Content="&lt;" Command="{Binding ShowPreviousPage}"/>
+                <Label Content="{Binding PageInfo}"/>
+                <Button Content="&gt;" Command="{Binding ShowNextPageCommand}"/>
+                <Button Content="&gt;&gt;" Command="{Binding ShowLastPageCommand}"/>
+                <Label Content="Кол-во записей на странице:"/>
+                <ComboBox ItemsSource="{Binding PageSizes}"
+                          SelectedItem="{Binding CurrentPageSize}"/>
+        </StackPanel>
+    </Grid>
+    
 </Window>
