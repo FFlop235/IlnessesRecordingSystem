@@ -10,6 +10,10 @@ using CommunityToolkit.Mvvm.Input;
 using IllnessesRecordingSystem.DB;
 using IllnessesRecordingSystem.Models;
 using IllnessesRecordingSystem.Views;
+using MsBox.Avalonia;
+using MsBox.Avalonia.Dto;
+using MsBox.Avalonia.Enums;
+using MsBox.Avalonia.Models;
 
 namespace IllnessesRecordingSystem.ViewModels;
 
@@ -93,20 +97,39 @@ public partial class MainWindowViewModel : ViewModelBase
         CalculatePages();
     }
 
-    /*Window GetMain()
+    Window GetMain()
     {
         Window main = null;
         if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             main = desktop.MainWindow;
         return main;
-    }*/
+    }
 
     [RelayCommand]
-    public void DeleteSelectedIllnessRecord()
+    public async void DeleteSelectedIllnessRecord()
     {
-        using var db = new IllnessRecordRepository();
-        db.Delete(SelectedIllnessRecord);
-        RefreshData();
+        /*var messageBox = MessageBoxManager
+            .GetMessageBoxStandard("Подтверждение", $"Удалить запись о заболевании сотрудника {SelectedIllnessRecord.EmployeeName}?", ButtonEnum.YesNo);*/
+        var messageBox = MessageBoxManager.GetMessageBoxCustom(
+            new MessageBoxCustomParams
+            {
+                ContentTitle = "Подтверждение",
+                ContentMessage = $"Удалить запись о заболевании сотрудника {SelectedIllnessRecord.EmployeeName}?",
+                ButtonDefinitions = new List<ButtonDefinition>
+                {
+                    new ButtonDefinition {Name = "✅", IsDefault = true},
+                    new ButtonDefinition {Name = "❌"}
+                }
+            });
+
+        var result = await messageBox.ShowWindowDialogAsync(GetMain());
+
+        if (result == "✅")
+        {
+            using var db = new IllnessRecordRepository();
+            db.Delete(SelectedIllnessRecord);
+            RefreshData();
+        }
     }
     
     [RelayCommand]
