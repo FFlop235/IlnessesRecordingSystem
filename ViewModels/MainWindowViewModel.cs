@@ -124,6 +124,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
         var result = await messageBox.ShowWindowDialogAsync(GetMain());
 
+        // if (result == ButtonResult.Yes)
         if (result == "✅")
         {
             using var db = new IllnessRecordRepository();

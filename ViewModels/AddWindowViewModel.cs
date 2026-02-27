@@ -8,6 +8,8 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using IllnessesRecordingSystem.DB;
 using IllnessesRecordingSystem.Models;
+using MsBox.Avalonia;
+using MsBox.Avalonia.Enums;
 
 namespace IllnessesRecordingSystem.ViewModels;
 
@@ -68,9 +70,49 @@ public partial class AddWindowViewModel: ObservableObject
         }
     }
     
-    [RelayCommand]
-    public void AddRecord()
+    Window GetWindow()
     {
+        if (App.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+        {
+            foreach (var window in desktop.Windows)
+            {
+                if (window.DataContext == this)
+                {
+                    return window;
+                }
+            }
+        }
+
+        return null;
+    }
+    
+    [RelayCommand]
+    public async void AddRecord()
+    {
+        if (SelectedEmployee == null || string.IsNullOrWhiteSpace(SelectedEmployee.FullName))
+        {
+            var errorBox = MessageBoxManager
+                .GetMessageBoxStandard("Ошибка", "Укажите ФИО сотрудника", ButtonEnum.Ok);
+            await errorBox.ShowWindowDialogAsync(GetWindow());
+            return;
+        }
+        
+        if (SelectedIllnessType == null || string.IsNullOrWhiteSpace(SelectedIllnessType.Name))
+        {
+            var errorBox = MessageBoxManager
+                .GetMessageBoxStandard("Ошибка", "Укажите тип болезни", ButtonEnum.Ok);
+            await errorBox.ShowWindowDialogAsync(GetWindow());
+            return;
+        }
+
+        if (EndDate < StartDate)
+        {
+            var errorBox = MessageBoxManager
+                .GetMessageBoxStandard("Ошибка", "Дата окончания не может быть раньше даты начала", ButtonEnum.Ok);
+            await errorBox.ShowWindowDialogAsync(GetWindow());
+            return;
+        }
+
         var AddRecord = new IllnessRecordViem
         {
             Id = _illnessRecordRepository.GetRowsCount() + 1,
