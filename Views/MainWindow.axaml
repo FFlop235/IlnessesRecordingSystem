@@ -18,7 +18,8 @@
             ItemsSource="{Binding IllnessRecords}"
             GridLinesVisibility="All"
             BorderThickness="1"
-            BorderBrush="Gray">
+            BorderBrush="Gray"
+            SelectedItem="{Binding SelectedIllnessRecord}">
             <DataGrid.Columns>
                 <!--<DataGridTextColumn Header="ID" Binding="{Binding Id}"/>-->
                 <DataGridTextColumn Header="Имя" Binding="{Binding EmployeeName}"/>
@@ -32,8 +33,10 @@
         <StackPanel Grid.Row="1"
                     Orientation="Horizontal"
                     HorizontalAlignment="Center"
-                    Margin="10">
+                    Margin="10"
+                    Spacing="10">
             <Button Content="Добавить" Command="{Binding OpenAddWindow}"/>
+            <Button Content="Удалить" Command="{Binding DeleteSelectedIllnessRecord}"/>
         </StackPanel>
         <StackPanel 
             Grid.Row="2"

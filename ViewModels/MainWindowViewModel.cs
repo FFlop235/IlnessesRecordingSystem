@@ -20,6 +20,8 @@ public partial class MainWindowViewModel : ViewModelBase
     [ObservableProperty] private int _currentPageSize;
     [ObservableProperty] private List<int> pageSizes;
     [ObservableProperty] private string _pageInfo;
+    
+    [ObservableProperty] private IllnessRecordViem _selectedIllnessRecord;
 
     private int _currentPage = 1;
     private int _totalPages;
@@ -99,6 +101,14 @@ public partial class MainWindowViewModel : ViewModelBase
         return main;
     }*/
 
+    [RelayCommand]
+    public void DeleteSelectedIllnessRecord()
+    {
+        using var db = new IllnessRecordRepository();
+        db.Delete(SelectedIllnessRecord);
+        RefreshData();
+    }
+    
     [RelayCommand]
     public void OpenAddWindow()
     {
