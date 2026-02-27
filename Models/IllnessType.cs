@@ -1,4 +1,4 @@
-﻿namespace IlnessesRecordingSystem.Models;
+﻿namespace IllnessesRecordingSystem.Models;
 
 public class IllnessType
 {

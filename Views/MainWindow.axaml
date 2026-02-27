@@ -1,10 +1,10 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:IlnessesRecordingSystem.ViewModels"
+        xmlns:vm="using:IllnessesRecordingSystem.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="600"
-        x:Class="IlnessesRecordingSystem.Views.MainWindow"
+        x:Class="IllnessesRecordingSystem.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Title="IlnessesRecordingSystem">
@@ -13,7 +13,7 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-    <Grid RowDefinitions="* Auto">
+    <Grid RowDefinitions="* Auto Auto">
         <DataGrid 
             ItemsSource="{Binding IllnessRecords}"
             GridLinesVisibility="All"
@@ -29,8 +29,14 @@
                 <DataGridTextColumn Header="Дни болезни" Binding="{Binding DurationDays}"/>
             </DataGrid.Columns>
         </DataGrid>
+        <StackPanel Grid.Row="1"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    Margin="10">
+            <Button Content="Добавить" Command="{Binding OpenAddWindow}"/>
+        </StackPanel>
         <StackPanel 
-            Grid.Row="1"
+            Grid.Row="2"
             Orientation="Horizontal"
             HorizontalAlignment="Center">
                 <Button Content="&lt;&lt;" Command="{Binding ShowFirstPageCommand}"/>

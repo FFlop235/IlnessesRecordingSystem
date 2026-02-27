@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml;
-using IlnessesRecordingSystem.Models;
+using IllnessesRecordingSystem.Models;
 using MySqlConnector;
 
-namespace IlnessesRecordingSystem.DB;
+namespace IllnessesRecordingSystem.DB;
 
 public class IllnessRecordRepository: BaseRepository<IllnessRecordViem>, IPaginatedRepository<IllnessRecordViem>, IDisposable
 {

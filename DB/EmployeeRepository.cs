@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using IlnessesRecordingSystem.Models;
+using IllnessesRecordingSystem.Models;
 using MySqlConnector;
 
-namespace IlnessesRecordingSystem.DB;
+namespace IllnessesRecordingSystem.DB;
 
 public class EmployeeRepository: BaseRepository<Employee>, IDisposable
 {

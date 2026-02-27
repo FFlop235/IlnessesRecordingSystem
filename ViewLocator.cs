@@ -2,9 +2,9 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
-using IlnessesRecordingSystem.ViewModels;
+using IllnessesRecordingSystem.ViewModels;
 
-namespace IlnessesRecordingSystem;
+namespace IllnessesRecordingSystem;
 
 /// <summary>
 /// Given a view model, returns the corresponding view if possible.

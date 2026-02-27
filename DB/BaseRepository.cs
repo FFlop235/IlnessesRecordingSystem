@@ -4,7 +4,7 @@ using System.IO;
 using DotNetEnv;
 using MySqlConnector;
 
-namespace IlnessesRecordingSystem.DB;
+namespace IllnessesRecordingSystem.DB;
 
 public abstract class BaseRepository<T> : IDisposable, IRepository<T> where T : class
 {

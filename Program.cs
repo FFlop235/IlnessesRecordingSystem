@@ -1,7 +1,7 @@
 ﻿using Avalonia;
 using System;
 
-namespace IlnessesRecordingSystem;
+namespace IllnessesRecordingSystem;
 
 sealed class Program
 {

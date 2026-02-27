@@ -4,10 +4,10 @@ using Avalonia.Data.Core;
 using Avalonia.Data.Core.Plugins;
 using System.Linq;
 using Avalonia.Markup.Xaml;
-using IlnessesRecordingSystem.ViewModels;
-using IlnessesRecordingSystem.Views;
+using IllnessesRecordingSystem.ViewModels;
+using IllnessesRecordingSystem.Views;
 
-namespace IlnessesRecordingSystem;
+namespace IllnessesRecordingSystem;
 
 public partial class App : Application
 {

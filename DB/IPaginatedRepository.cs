@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace IlnessesRecordingSystem.DB;
+namespace IllnessesRecordingSystem.DB;
 
 public interface IPaginatedRepository<T> : IRepository<T> where T: class
 {

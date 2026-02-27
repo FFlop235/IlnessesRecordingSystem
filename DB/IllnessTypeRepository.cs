@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using IlnessesRecordingSystem.Models;
+using IllnessesRecordingSystem.Models;
 using MySqlConnector;
 
-namespace IlnessesRecordingSystem.DB;
+namespace IllnessesRecordingSystem.DB;
 
 public class IllnessTypeRepository: BaseRepository<IllnessType>, IDisposable
 {
@@ -29,28 +29,29 @@ public class IllnessTypeRepository: BaseRepository<IllnessType>, IDisposable
 
     public override IllnessType GetById(int id)
     {
-        var cmd = new MySqlCommand(@"SELECT Id, Name FROM Employees WHERE Id = @id", connection);
+        var cmd = new MySqlCommand(@"SELECT Id, Name FROM IllnessTypes WHERE Id = @id", connection);
         
         cmd.Parameters.AddWithValue("@id", id);
 
-        using var reader = cmd.ExecuteReader();
-        if (reader.Read())
+        using (var reader = cmd.ExecuteReader())
         {
-            return new IllnessType
+            if (reader.Read())
             {
-                Id = reader.GetInt32("Id"),
-                Name = reader.GetString("Name")
-            };
+                return new IllnessType
+                {
+                    Id = reader.GetInt32("Id"),
+                    Name = reader.GetString("Name")
+                };
+            }
+            return null;
         }
-        
-        return null;
     }
 
-    public override IEnumerable<IllnessType> GetAll()
+    public override List<IllnessType> GetAll()
     {
         var result = new List<IllnessType>();
         
-        var cmd  = new MySqlCommand(@"SELECT Id, Name FROM IllnessTypes");
+        var cmd = new MySqlCommand(@"SELECT Id, Name FROM IllnessTypes", connection);
         
         using (var reader = cmd.ExecuteReader())
         {
